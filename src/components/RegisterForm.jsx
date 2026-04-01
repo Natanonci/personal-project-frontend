@@ -1,4 +1,4 @@
-import { apiRegister, mainApi } from "../api/mainApi"
+import { apiRegister, mainApi } from "../api/mainApi.js"
 import { registerSchema } from "../validations/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
@@ -19,7 +19,7 @@ function RegisterForm() {
     const onSubmit = async (data) => {
         try {
             await new Promise(resolve => setTimeout(resolve, 1000))
-            const resp = await mainApi.post('/auth/register', data)
+            const resp = await mainApi.post('/api/auth/register', data)
 
             toast.success(resp.data.message, { transition: Slide, position: "bottom-right", })
             document.getElementById('register-form').close()

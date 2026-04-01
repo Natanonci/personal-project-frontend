@@ -1,4 +1,4 @@
-import { mainApi } from "../api/mainApi";
+import { mainApi } from "../api/mainApi.js";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -7,7 +7,7 @@ const useUserStore = create(persist((set, get) => ({
     user: null,
     token: '',
     login: async (body) => {
-        const resp = await mainApi.post('/auth/login', body)
+        const resp = await mainApi.post('/api/auth/login', body)
         set({
             token: resp.data.token,
             user: resp.data.user,

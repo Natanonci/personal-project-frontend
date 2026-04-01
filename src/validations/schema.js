@@ -39,3 +39,17 @@ export const editProfileSchema = z.object({
     ...(data.phone_number && { phone_number: data.phone_number }),
     ...(data.profile_image && { profile_image: data.profile_image }),
 }))
+
+export const reservationSchema = z.object({
+    storeId: z.string().min(1, "กรุณาเลือกร้านที่ต้องการจอง"),
+    start_date: z.string().min(1, "กรุณาระบุวันและเวลาเริ่มต้น"),
+    end_date: z.string().min(1, "กรุณาระบุวันและเวลาสิ้นสุด"),
+    total_guest: z.string().min(1, "กรุณาระบุจำนวนสัตว์เลี้ยง/ผู้เข้าใช้บริการ"),
+    price: z.string().min(1, "กรุณาระบุราคา"),
+}).transform(data => ({
+    storeId: Number(data.storeId), 
+    start_date: new Date(data.start_date).toISOString(), 
+    end_date: new Date(data.end_date).toISOString(),
+    total_guest: Number(data.total_guest), 
+    price: Number(data.price) 
+}));
